@@ -32,6 +32,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = new File(
+                    "app-" + "displaytimeouttoggle" + "-release" + "-" + versionName + ".apk")
+        }
+    }
 }
 
 dependencies {
