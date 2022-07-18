@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Display Timeout Toggle</string>
+    <string name="service_name">DisplayTimeOut Toggle Service</string>
+</resources>
