@@ -98,7 +98,7 @@ class DisplayToggleService : Service() {
         // Return Build Notification object
         return notificationBuilder
             .setContentTitle("Service is active")
-            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setSmallIcon(R.drawable.ic_generic_brightness)
             .setCategory(Notification.CATEGORY_SERVICE)
             .setPriority(NotificationManager.IMPORTANCE_MIN)
             .addAction(R.drawable.ic_generic_close, "STOP", stopServicePendingIntent)
