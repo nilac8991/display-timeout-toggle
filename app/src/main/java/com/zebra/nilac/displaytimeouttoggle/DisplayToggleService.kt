@@ -8,7 +8,10 @@ import android.content.IntentFilter
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.zebra.nilac.displaytimeouttoggle.utils.EMDKLoader
+import com.zebra.nilac.emdkloader.EMDKLoader
+import com.zebra.nilac.emdkloader.ProfileLoader
+import com.zebra.nilac.emdkloader.interfaces.EMDKManagerInitCallBack
+import com.zebra.nilac.emdkloader.interfaces.ProfileLoaderResultCallback
 
 class DisplayToggleService : Service() {
 
@@ -24,7 +27,7 @@ class DisplayToggleService : Service() {
         mIsServiceRunning = true
 
         EMDKLoader.getInstance()
-            .initEMDKManager(this, object : EMDKLoader.EMDKManagerInitCallBacks {
+            .initEMDKManager(this, object : EMDKManagerInitCallBack {
                 override fun onSuccess() {
                     Log.i(
                         TAG,
@@ -126,19 +129,18 @@ class DisplayToggleService : Service() {
     }
 
     private fun updateStayAwakeValue(state: Boolean) {
-        EMDKLoader.getInstance()
-            .processEMDKProfile(
-                AppConstants.PROFILE_NAME,
-                getUpdatedProfile(state),
-                object : EMDKLoader.EMDKProfileResultCallBacks {
-                    override fun onProfileLoaded() {
-                        Log.d(TAG, "Profile successfully applied")
-                    }
+        ProfileLoader().processProfile(
+            AppConstants.PROFILE_NAME,
+            getUpdatedProfile(state),
+            object : ProfileLoaderResultCallback {
+                override fun onProfileLoaded() {
+                    Log.d(TAG, "Profile successfully applied")
+                }
 
-                    override fun onProfileLoadFailed(message: String) {
-                        Log.d(TAG, "Failed to process the profile")
-                    }
-                })
+                override fun onProfileLoadFailed(message: String) {
+                    Log.d(TAG, "Failed to process the profile")
+                }
+            })
     }
 
     private fun getUpdatedProfile(state: Boolean): String {

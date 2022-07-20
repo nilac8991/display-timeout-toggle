@@ -4,12 +4,6 @@
     package="com.zebra.nilac.displaytimeouttoggle">
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="com.symbol.emdk.permission.EMDK" />
-
-    <!-- EMDK Permission -->
-    <queries>
-        <package android:name="com.symbol.emdk.emdkservice" />
-    </queries>
 
     <application
         android:allowBackup="false"
@@ -33,11 +27,6 @@
         <service
             android:name=".DisplayToggleService"
             android:enabled="true" />
-
-        <!-- EMDK Lib -->
-        <uses-library
-            android:name="com.symbol.emdk"
-            android:required="true" />
 
     </application>
 
